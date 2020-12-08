@@ -11,7 +11,6 @@ int main(int argc, char **argv) {
         printf("Modo de impressao ativado ... \n");
         printTree(argv[2]);
         printf("Impressao realizada com sucesso!\n"); 
-        
     } else if (strcmp(argv[1], "-c") == 0) {
         printf("Modo de criacao da arvore-B ativado ... nome do arquivo = %s\n\n", argv[2]);
         createTree(argv[2]);

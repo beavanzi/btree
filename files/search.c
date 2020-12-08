@@ -1,7 +1,6 @@
 #include "general.h"
 
 //chave[i], filho.esq = filhos[i], filho.dir = filhos[i+1]
-
 //trabalha em duas etapas, alterna entre busca de paginas e busca dentro da pagina
 
 //search(root, key, &RRN_found, &pos_found)

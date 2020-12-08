@@ -1,5 +1,24 @@
 #include "general.h"
 
+int heightResult()
+{
+    int root;
+    page pag;
+    int i, rrn = 0;
+    int height = -1; //inicial
+    
+    fseek(btree, 0 , SEEK_SET);
+    fread(&root, sizeof(int), 1, btree);
+    rrn = root;
+    while(rrn != -1)
+    {
+        readPage(rrn, &pag);
+        rrn = pag.children[0];
+        height++;
+    }
+    return height;
+}
+
 void printTree(){
     page pag;
     int i;
@@ -36,6 +55,7 @@ void printTree(){
         }
 
     }
+    printf("\nAltura da árvore: %d", heightResult());
     printf("\nDigite enter para sair: ");
     getchar();
     fclose(btree);
