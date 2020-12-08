@@ -1,14 +1,6 @@
 #include "general.h"
 
 int readKey(FILE *keys_file){
-    // int key, ans;
-    
-    // ans = fscanf(keys_file, "%d", &key);
-    
-    // if (ans == -1) return -1;
-
-    // return key;
-
     if(feof(keys_file) != 0){
         return EOF;
     } else {

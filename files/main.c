@@ -12,6 +12,10 @@ int main(int argc, char **argv) {
         printTree(argv[2]);
         printf("Impressao realizada com sucesso!\n"); 
     } else if (strcmp(argv[1], "-c") == 0) {
+        if (!(argv[2])){
+            printf("ERRO: Informe um arquivo para entrada de chaves!");
+            exit(1);
+        }
         printf("Modo de criacao da arvore-B ativado ... nome do arquivo = %s\n\n", argv[2]);
         createTree(argv[2]);
         printf("Execução finalizada com sucesso!\n");
