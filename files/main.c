@@ -1,9 +1,7 @@
 #include "general.h"
 
-void readPage(int RRN, page* pag);
-
 int main(int argc, char **argv) {
-    if (argc < 3) {
+    if (argc < 2) {
         fprintf(stderr, "Numero incorreto de argumentos!\n");
         fprintf(stderr, "Modo de uso:\n");
         fprintf(stderr, "$ %s -c nome_arquivo ou $ %s -p\n", argv[0], argv[0]);
@@ -11,8 +9,8 @@ int main(int argc, char **argv) {
     }
     if (strcmp(argv[1], "-p") == 0) {
         printf("Modo de impressao ativado ... \n");
-        //printTree(argv[2]);
-        printf("Impressao realizada com sucesso!\n");
+        printTree(argv[2]);
+        printf("Impressao realizada com sucesso!\n"); 
         
     } else if (strcmp(argv[1], "-c") == 0) {
         printf("Modo de criacao da arvore-B ativado ... nome do arquivo = %s\n\n", argv[2]);

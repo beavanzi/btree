@@ -14,8 +14,8 @@ typedef struct {
 typedef struct{
     int count_key;
     int RRN;
-    int keys[MAXKEYS+1];
     int children[MAXKEYS+2];
+    int keys[MAXKEYS+1];
 } aux_page;
 
 
@@ -25,6 +25,7 @@ void createTree(char *argv);
 void readPage(int RRN, page* pag);
 bool searchPage(int key, page PAG, int *POS);
 void createPage(page* pag);
-//void cleanPage(page *pag, int max);
+void cleanPage(page *pag, int max);
 bool insert(int RRN_now,int key, int *right_child_promote, int *key_promote );
-void insertKey(int root, int key, page *new_page);
+void insertKey(int *root, int key, page *new_page);
+void printTree();

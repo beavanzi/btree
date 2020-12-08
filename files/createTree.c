@@ -1,9 +1,27 @@
 #include "general.h"
 
 int readKey(FILE *keys_file){
-    int key;
-    fscanf(keys_file, "%d", &key);
-    return key;
+    // int key, ans;
+    
+    // ans = fscanf(keys_file, "%d", &key);
+    
+    // if (ans == -1) return -1;
+
+    // return key;
+
+    if(feof(keys_file) != 0){
+        return EOF;
+    } else {
+        char key = fgetc(keys_file);
+        char str[12];
+        memset(str, '\0', 12);
+
+        while(key != '\n' && key != EOF){
+            str[strlen(str)] = key;
+            key = getc(keys_file); 
+        }
+        return atoi(str);
+    }
 }
 
 int RRN_newPage(){ 
@@ -17,7 +35,7 @@ int RRN_newPage(){
 void cleanPage(page *pag, int max){
 	int i;
     pag->count_key = 0;
-    for(i = 0; i < (max+1); i++){
+    for(i = 0; i < (max); i++){
         pag->keys[i] = 0;
         pag->children[i] = -1;
     }
@@ -25,7 +43,7 @@ void cleanPage(page *pag, int max){
 
 void createPage(page* pag){
     cleanPage(pag, MAXKEYS);
-   // pag->children[MAXKEYS+1] = -1;
+    pag->children[MAXKEYS] = -1;
     pag->RRN = RRN_newPage();
 }
 
@@ -40,35 +58,15 @@ void createTree(char *argv){
         createPage(&new_page);
         fwrite(&new_page, sizeof(page), 1, btree);
     } else {
+        fseek(btree, 0, SEEK_SET);
         fread(&root, sizeof(int), 1, btree);
     }
 
     keys_file = fopen(argv, "r");
     int key = readKey(keys_file); 
     
-    while(key != EOF){
-        
-        insertKey(root, key, &new_page);
-        // printf("\n---NOVA INSERCAO---\n");
-        
-
-        // if(insert(root, key, &right_child_promote, &key_promote)){ //Quando troca a raiz
-        //     createPage(&new_page);
-        //     printf("Nova raiz: %d", new_page.RRN);
-        //     new_page.keys[0] = key_promote;
-        //    // new_page.byteoffset[0] = offset_pro;
-        //     new_page.children[0] = root;
-        //     new_page.children[1] = right_child_promote;
-        //     new_page.count_key++;
-        //     writePage(new_page.RRN, &new_page);
-        //     root = new_page.RRN;
-        // }
-        //offset_reg = offset_reg + tam_reg + sizeof(short int);
-        //num_reg--;
-        // strcpy(buffer,"");
-        //tam_reg = get_rec(keys_file, buffer, 256);
-        //char_id = strtok(buffer, "|");
-        // chave = atoi(char_id);
+    while(key != -1){
+        insertKey(&root, key, &new_page);
         key = readKey(keys_file);
     }
     
