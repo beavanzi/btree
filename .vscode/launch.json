@@ -9,7 +9,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/files/a.exe",
-      "args": ["-p", "${workspaceFolder}\\additional\\keys"],
+      "args": ["-p", "${workspaceFolder}\\additional\\keys_10"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "externalConsole": true,

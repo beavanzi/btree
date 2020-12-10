@@ -1,3 +1,3 @@
-
-trabalho: 
-	gcc $(wildcard ./main.c) -o trabalho
+trabalho:
+	echo "Compilando o trabalho..."
+	gcc $(wildcard ./files/*.c) -g -o trabalho

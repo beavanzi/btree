@@ -1,14 +1,6 @@
 #include "general.h"
 
 int readKey(FILE *keys_file){
-    // int key, ans;
-    
-    // ans = fscanf(keys_file, "%d", &key);
-    
-    // if (ans == -1) return -1;
-
-    // return key;
-
     if(feof(keys_file) != 0){
         return EOF;
     } else {
@@ -52,18 +44,14 @@ void createTree(char *argv){
     page new_page;
     int root = 0;
 
-    if ((btree = fopen("btree.dat", "r+b")) == NULL) {
-        btree = fopen("btree.dat", "w+b");
-        fwrite(&root, sizeof(int), 1, btree);
-        createPage(&new_page);
-        fwrite(&new_page, sizeof(page), 1, btree);
-    } else {
-        fseek(btree, 0, SEEK_SET);
-        fread(&root, sizeof(int), 1, btree);
-    }
+    btree = fopen("btree.dat", "w+b");
+    fwrite(&root, sizeof(int), 1, btree);
+    createPage(&new_page);
+    fwrite(&new_page, sizeof(page), 1, btree);
 
     keys_file = fopen(argv, "r");
-    int key = readKey(keys_file); 
+    int key = readKey(keys_file);
+    
     
     while(key != -1){
         insertKey(&root, key, &new_page);

@@ -1,3 +1,6 @@
-btree.data
+.vscode
+*.dat
 /additional/*.exe
 /files/*.exe
+*.zip
+*.rar
