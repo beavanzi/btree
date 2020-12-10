@@ -28,3 +28,4 @@ void cleanPage(page *pag, int max);
 int insert(int RRN_now, int key, int *right_child_promote, int *key_promote);
 void insertKey(int *root, int key, page *new_page);
 void printTree();
+int readKey(FILE *keys_file);

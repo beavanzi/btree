@@ -95,7 +95,7 @@ void slice(int key, int right_child, page *pag , int *key_promote, int *right_ch
     }
     pag->children[i] = auxp.children[i];
 
-    i = middle + 1;
+    i = middle+1;
     while(i < MAXKEYS+1){ //count_key = 0
         newPage->keys[newPage->count_key] = auxp.keys[i];
         newPage->children[newPage->count_key] = auxp.children[i];
@@ -139,4 +139,32 @@ int insert(int RRN_now, int key, int *right_child_promote, int *key_promote){
             return 1;                               //promove
         }
     }
-} 
+}
+
+void manager( char *argv){
+    FILE* comandos;
+    page new_page;
+    int key, found, root;
+    int RRN_encontrado, pos_encontrada, filho_d_pro, chave_pro;
+
+    FILE *keys_file;
+    btree = fopen("btree.dat", "r+b");
+    keys_file = fopen(argv, "r");
+
+    fread(&root, sizeof(int), 1, btree);
+
+    if(btree == NULL || keys_file == NULL){
+        printf("Erro na abertura de arquivos\n");
+        exit(1);
+    }else printf("Sucesso na abertura dos arquivos\n");
+
+    key = readKey(keys_file);
+
+    while(key != -1){
+        insertKey(&root, key, &new_page);
+        key = readKey(keys_file);
+    }
+    
+    fclose(btree);
+    fclose(keys_file);
+}
